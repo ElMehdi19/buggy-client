@@ -13,12 +13,9 @@ const ReportsMain: React.FC = () => {
     if (data) {
       const { reports } = data;
       const reportList = reports.map((report) => getReportRow(report));
-      console.log(data.reports);
       setReports(reportList);
     }
   }, [data]);
-
-  useEffect(() => console.log(reports), [reports]);
 
   return (
     <div>

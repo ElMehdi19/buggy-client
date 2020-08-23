@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { REPORT } from "../../gql/Queries";
 import ReportTemplate from "./ReportTemplate";
 import ReportTimeline from "./ReportTimeline";
+import CommentSection from "../comments/CommentSection";
 import { ReportWrapper } from "../../layout/Wrapper";
 import { getReportObj } from "../../utlis";
 
@@ -40,7 +41,6 @@ const Report: React.FC<RouteComponentProps<{ reportId: string }>> = ({
   const { loading, data } = useQuery<{ report: SingleReportType }>(REPORT, {
     variables: { id: parseInt(match.params.reportId) },
   });
-  //   const [loading, setLoading] = useState<boolean>(true);
   const [report, setReport] = useState<SingleReportType>();
 
   useEffect(() => {
@@ -54,6 +54,7 @@ const Report: React.FC<RouteComponentProps<{ reportId: string }>> = ({
     <ReportWrapper>
       <ReportTemplate loading={loading} report={report} />
       <ReportTimeline />
+      <CommentSection reportId={parseInt(match.params.reportId)} />
     </ReportWrapper>
   );
 };

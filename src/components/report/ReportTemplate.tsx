@@ -34,7 +34,9 @@ const ReportTemplate: React.FC<Props> = ({ loading, report }) => {
       >
         <Button danger>Edit</Button>
         <Button type="primary">Assign</Button>
-        <Button>Comment</Button>
+        <Button>
+          <a href="#comments">Comment</a>
+        </Button>
       </Grid>
       <Grid
         style={{

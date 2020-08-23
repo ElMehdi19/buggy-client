@@ -18,16 +18,6 @@ type ReportResponse = {
     firstName: string;
     lastName: string;
   };
-  comments?: {
-    id: number;
-    content: string;
-    posted: string;
-    author: {
-      id: string;
-      firstName: string;
-      lastName: string;
-    };
-  };
 };
 
 export const getReportRow = (report: ReportResponse): ReportType => {

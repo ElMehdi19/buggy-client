@@ -70,15 +70,19 @@ export const REPORT = gql`
         lastName
         email
       }
-      comments {
-        id
-        content
-        posted
-        author {
-          id
-          firstName
-          lastName
-        }
+    }
+  }
+`;
+
+export const COMMENTS = gql`
+  query Comments($reportId: Int!) {
+    comments(reportId: $reportId) {
+      id
+      content
+      posted
+      author {
+        firstName
+        lastName
       }
     }
   }
