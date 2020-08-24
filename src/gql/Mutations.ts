@@ -35,3 +35,11 @@ export const ADD_REPORT = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+  mutation AddComment($reportId: Int!, $content: String!) {
+    addComment(reportId: $reportId, content: $content) {
+      id
+    }
+  }
+`;
