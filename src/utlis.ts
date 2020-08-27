@@ -65,3 +65,12 @@ export const getReportObj = (report: ReportResponse): ReportType => {
     status,
   };
 };
+
+export const timelineItemColor = (description: string): string => {
+  if (description.includes("OPEN")) return "blue";
+  if (description.includes("PROGRESS")) return "orange";
+  if (description.includes("TESTED")) return "green";
+  if (description.includes("CLOSED")) return "geekblue";
+  if (description.includes("comment")) return "cyan";
+  return "magenta";
+};

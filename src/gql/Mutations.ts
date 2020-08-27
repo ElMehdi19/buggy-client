@@ -43,3 +43,9 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const UPDATE_ISSUE_STATUS = gql`
+  mutation UpdateStatus($reportId: Int!, $status: String!) {
+    updateIssueStatus(reportId: $reportId, status: $status)
+  }
+`;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_COMMENT } from "../../gql/Mutations";
 import { Input, Button, Form, Avatar } from "antd";
-import { COMMENTS } from "../../gql/Queries";
+import { COMMENTS, REPORT } from "../../gql/Queries";
 
 const { TextArea } = Input;
 const { Item } = Form;
@@ -17,14 +17,16 @@ const CommentForm: React.FC<Props> = ({ reportId }) => {
   const [comment, setComment] = useState<string>("");
   const [addComment] = useMutation(ADD_COMMENT, {
     variables: { reportId, content: "" },
-    refetchQueries: [{ query: COMMENTS, variables: { reportId } }],
+    refetchQueries: [
+      { query: COMMENTS, variables: { reportId } },
+      { query: REPORT, variables: { id: reportId } },
+    ],
   });
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setComment(e.target.value);
 
   const handleSubmit = (values: { [key: string]: string }) => {
     const { comment } = values as { comment: string };
-    console.log(comment);
     addComment({ variables: { reportId, content: comment } });
     setComment("");
   };

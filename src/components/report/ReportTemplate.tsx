@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Avatar, Button, Tag } from "antd";
 import { SingleReportType } from "./Report";
+import StatusDropDown from "./StatusDropDown";
 
 type Props = {
   loading: boolean;
@@ -48,7 +49,7 @@ const ReportTemplate: React.FC<Props> = ({ loading, report }) => {
         }}
         hoverable={false}
       >
-        <Tag color="geekblue">{report?.status}</Tag>
+        <StatusDropDown reportId={report?.id} status={report?.status} />
         <Tag color="volcano">{report?.severity}</Tag>
       </Grid>
       <Grid style={{ width: "100%" }} hoverable={false}>

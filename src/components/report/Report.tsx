@@ -32,7 +32,7 @@ export type SingleReportType = {
   reproduceSteps: string[];
   project: { name: string };
   reporter: Reporter;
-  // comments?: Comment[];
+  events: string;
 };
 
 const Report: React.FC<RouteComponentProps<{ reportId: string }>> = ({
@@ -53,7 +53,7 @@ const Report: React.FC<RouteComponentProps<{ reportId: string }>> = ({
   return (
     <ReportWrapper>
       <ReportTemplate loading={loading} report={report} />
-      <ReportTimeline />
+      <ReportTimeline issueEvents={report?.events} />
       <CommentSection reportId={parseInt(match.params.reportId)} />
     </ReportWrapper>
   );

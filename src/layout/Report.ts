@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Tag } from "antd";
+import { TagProps } from "antd/lib/tag";
 
 export const Card = styled.div`
   width: 100%;
@@ -23,4 +25,10 @@ export const CardTitleImg = styled.img`
 
 export const CardTitleText = styled.div`
   flex: 2;
+`;
+
+export const StatusTag = styled(Tag)<TagProps>`
+  &:hover {
+    cursor: pointer;
+  }
 `;

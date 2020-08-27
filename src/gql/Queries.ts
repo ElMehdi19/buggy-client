@@ -54,6 +54,7 @@ export const REPORTS = gql`
 export const REPORT = gql`
   query Report($id: Int!) {
     report(id: $id) {
+      id
       bug
       details
       status
@@ -61,6 +62,7 @@ export const REPORT = gql`
       created
       updated
       reproduceSteps
+      events
       project {
         name
       }
