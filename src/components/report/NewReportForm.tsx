@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Input, Select } from "antd";
 import {
   InfoCircleOutlined,
-  PlusCircleFilled,
+  PlusOutlined,
   MinusCircleFilled,
 } from "@ant-design/icons";
 
@@ -138,11 +138,10 @@ const ReportForm: React.FC<Props> = ({ projects, handleSubmit }) => {
               </Form.Item>
             );
           })}
-        <div
-          onClick={() => setNSteps(nSteps + 1)}
-          style={{ textAlign: "center" }}
-        >
-          <PlusCircleFilled style={{ color: "green", fontSize: "1.6em" }} />
+        <div style={{ textAlign: "center", fontSize: "1.6em" }}>
+          <Button type="dashed" onClick={() => setNSteps(nSteps + 1)}>
+            <PlusOutlined /> Add Step
+          </Button>
         </div>
       </div>
       <Form.Item style={{ display: "flex" }}>

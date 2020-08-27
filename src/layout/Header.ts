@@ -19,8 +19,8 @@ export const Nav = styled.nav`
   width: 95%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin: 0 auto;
+  height: 100%;
 `;
 
 export const NavItems = styled.ul`
@@ -29,4 +29,5 @@ export const NavItems = styled.ul`
   gap: 20px;
   font-size: 1.2em;
   align-items: center;
+  height: 100%;
 `;

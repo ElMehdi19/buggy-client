@@ -12,7 +12,7 @@ const Wrapper: React.FC<RouteComponentProps<{}>> = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div>
-        <Link to="/reports/new">
+        <Link to="/report/new">
           <Button
             style={{ float: "right", margin: "10px 10px" }}
             type="primary"

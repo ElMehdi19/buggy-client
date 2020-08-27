@@ -30,7 +30,7 @@ const App: React.FC = () => {
         <Route exact path="/" component={Wrapper} />
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
-        <Route path="/reports/new" component={NewReport} />
+        <Route exact path="/report/new" component={NewReport} />
         <Route path="/reports/:reportId" component={Report} />
       </div>
     </ApolloProvider>

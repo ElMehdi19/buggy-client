@@ -22,7 +22,7 @@ export const ADD_REPORT = gql`
     $details: String!
     $severity: String!
     $project: Int!
-    $steps: [String!]
+    $steps: String!
   ) {
     addReport(
       bug: $bug
