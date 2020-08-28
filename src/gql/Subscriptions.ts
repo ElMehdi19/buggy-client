@@ -12,3 +12,13 @@ export const NEW_COMMENT = gql`
     }
   }
 `;
+
+export const TEMPORARY = gql`
+  subscription {
+    temporary {
+      notifications {
+        count
+      }
+    }
+  }
+`;

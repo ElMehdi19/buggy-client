@@ -13,6 +13,7 @@ import {
   BugOutlined,
   BellOutlined,
 } from "@ant-design/icons";
+import Notifications from "./Notifications";
 
 const Navbar: React.FC<RouteComponentProps<{}>> = ({ history }) => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const Navbar: React.FC<RouteComponentProps<{}>> = ({ history }) => {
             <SearchOutlined summary="Search" />
           </li>
           <li>
-            <BellOutlined />
+            <Notifications />
           </li>
           <li>
             <SettingOutlined />
