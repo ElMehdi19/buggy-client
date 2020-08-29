@@ -49,3 +49,9 @@ export const UPDATE_ISSUE_STATUS = gql`
     updateIssueStatus(reportId: $reportId, status: $status)
   }
 `;
+
+export const RESET_NOTIFICATIONS_COUNT = gql`
+  mutation {
+    resetNotificationCount
+  }
+`;

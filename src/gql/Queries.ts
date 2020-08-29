@@ -89,3 +89,9 @@ export const COMMENTS = gql`
     }
   }
 `;
+
+export const NOTIFICATION_COUNT = gql`
+  query {
+    notificationCount
+  }
+`;

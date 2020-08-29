@@ -13,12 +13,10 @@ export const NEW_COMMENT = gql`
   }
 `;
 
-export const TEMPORARY = gql`
+export const NEW_NOTIFICATION = gql`
   subscription {
-    temporary {
-      notifications {
-        count
-      }
+    newNotification {
+      notification
     }
   }
 `;
