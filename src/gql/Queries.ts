@@ -95,3 +95,12 @@ export const NOTIFICATION_COUNT = gql`
     notificationCount
   }
 `;
+
+export const NOTIFICATIONS = gql`
+  query {
+    notifications {
+      count
+      notifications
+    }
+  }
+`;

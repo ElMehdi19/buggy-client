@@ -1,4 +1,6 @@
+import { DocumentNode } from "@apollo/client";
 import moment from "moment";
+import { client } from "./App";
 import { ReportType } from "./components/report/ReportsTable";
 
 type ReportResponse = {
@@ -73,4 +75,11 @@ export const timelineItemColor = (description: string): string => {
   if (description.includes("CLOSED")) return "geekblue";
   if (description.includes("comment")) return "cyan";
   return "magenta";
+};
+
+export const updateCache = <Record>(query: DocumentNode, data: Record) => {
+  const cache = client.readQuery<Record>({ query });
+  if (cache) {
+    client.writeQuery<Record>({ query, data: { ...cache, ...data } });
+  }
 };

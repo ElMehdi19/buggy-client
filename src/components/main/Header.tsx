@@ -11,9 +11,9 @@ import {
   SettingOutlined,
   SearchOutlined,
   BugOutlined,
-  BellOutlined,
 } from "@ant-design/icons";
-import Notifications from "./Notifications";
+import Notifications from "../notifications/Notifications";
+// import Notifications from "../notifications/Notifications2";
 
 const Navbar: React.FC<RouteComponentProps<{}>> = ({ history }) => {
   const dispatch = useDispatch();

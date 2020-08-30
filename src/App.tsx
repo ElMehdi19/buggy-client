@@ -19,6 +19,8 @@ import NewReport from "./components/report/NewReport";
 import Report from "./components/report/Report";
 import { getMainDefinition } from "@apollo/client/utilities";
 
+import Blank from "./components/main/Blank";
+
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql",
   credentials: "include",
@@ -43,8 +45,7 @@ const link = split(
   httpLink
 );
 
-const client = new ApolloClient({
-  // uri: "http://localhost:4000/graphql",
+export const client = new ApolloClient({
   link,
   credentials: "include",
   cache: new InMemoryCache(),
@@ -60,6 +61,7 @@ const App: React.FC = () => {
       {/* {loggedIn && <Navbar />} */}
       <Navbar />
       <div className="App">
+        <Route exact path="/blank" component={Blank} />
         <Route exact path="/" component={Wrapper} />
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
