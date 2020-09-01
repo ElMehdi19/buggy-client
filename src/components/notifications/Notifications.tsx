@@ -15,6 +15,8 @@ import { updateCache } from "../../utlis";
 
 type NewNotification = {
   newNotification: {
+    notifier: number;
+    report: number;
     notification: string;
   };
 };
@@ -22,13 +24,18 @@ type NewNotification = {
 type Notifications = {
   notifications: {
     count: number;
-    notifications: string[];
+    notifications: {
+      report: number;
+      notification: string;
+    }[];
   };
 };
 
 const Notifications: React.FC = () => {
   const [count, setCount] = useState<number>(0);
-  const [notifications, setNotifications] = useState<string[]>([]);
+  const [notifications, setNotifications] = useState<
+    { report: number; notification: string }[]
+  >([]);
   const [show, _] = useState<boolean>(!!count);
   const { data: noticesData, loading: noticesLoading } = useQuery<
     Notifications
@@ -68,21 +75,11 @@ const Notifications: React.FC = () => {
 
   useEffect(() => {
     if (!loading && data) {
-      setCount(count + 1);
-
-      const { notification } = data.newNotification;
-      const cache = client.readQuery<Notifications>({
-        query: NOTIFICATIONS,
-      });
-      if (cache) {
-        const { count, notifications } = cache.notifications;
-        const update: Notifications = {
-          notifications: {
-            count: count + 1,
-            notifications: [...notifications, notification],
-          },
-        };
-        updateCache<Notifications>(NOTIFICATIONS, update);
+      const { notifier, notification, report } = data.newNotification;
+      const userId = localStorage.getItem("userId");
+      if (userId && notifier !== parseInt(userId)) {
+        setNotifications([{ notification, report }, ...notifications]);
+        setCount(count + 1);
       }
     }
   }, [data, loading]);
@@ -92,7 +89,7 @@ const Notifications: React.FC = () => {
         <BellOutlined style={{ fontSize: "1.4em" }} onClick={handleBellClick} />
       </Badge>
       {notificationState.show && (
-        <NotificationSidebar notifications={notifications} />
+        <NotificationSidebar notifications={notifications.slice(0, 7)} />
       )}
     </div>
   );

@@ -1,13 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import notificationAction from "../../store/actions/notificationAction";
 import { Sidebar, CloseSidebar, List } from "../../layout/Notifications";
 
-const template = (notice: string) => <li key={Math.random()}>{notice}</li>;
+type Notification = { report: number; notification: string };
 
 type Props = {
-  notifications: string[];
+  notifications: Notification[];
 };
+
+const template = (notice: Notification) => (
+  <Link to={`/reports/${notice.report}`}>
+    <li key={Math.random()}>{notice.notification}</li>
+  </Link>
+);
 
 const NotificationSidebar: React.FC<Props> = ({ notifications }) => {
   const dispatch = useDispatch();

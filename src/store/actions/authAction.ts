@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 type LOGIN_ACTION =
   | {
       type: "LOGIN_SUCCESS";
+      userId: number;
     }
   | {
       type: "LOGIN_ERROR";

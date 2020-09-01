@@ -19,11 +19,13 @@ type loginActionType =
       type: "LOGIN_ERROR";
       message: string;
     }
-  | { type: "LOGIN_SUCCESS" | "LOGOUT_SUCCESS" };
+  | { type: "LOGIN_SUCCESS"; userId: number }
+  | { type: "LOGOUT_SUCCESS" };
 
 const loginRequestReducer = (state = initState, action: loginActionType) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      localStorage.setItem("userId", String(action.userId));
       return { ...state, loggedIn: true, loginError: null };
     case LOGIN_ERROR:
       return { ...state, loggedIn: false, loginError: action.message };

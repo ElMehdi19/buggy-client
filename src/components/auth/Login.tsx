@@ -9,14 +9,23 @@ import { LOGIN } from "../../gql/Mutations";
 import { LOGIN_ERROR, LOGIN_SUCCESS } from "../../store/actions/constants";
 import LoginForm from "./LoginForm";
 
+type LoginMutationType = {
+  login: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  };
+};
+
 const Login: React.FC<RouteComponentProps<{}>> = ({ history }) => {
   const [success, setSuccess] = useState<boolean>(false);
 
   const loginState = useSelector<RootState, LoginState>((state) => state.login);
   const dipsatch = useDispatch();
-  const [loginMutation] = useMutation(LOGIN, {
+  const [loginMutation, { data }] = useMutation<LoginMutationType>(LOGIN, {
     variables: { email: "", password: "" },
-    onCompleted: () => dipsatch(loginUser({ type: LOGIN_SUCCESS })),
+    onCompleted: ({ login }) =>
+      dipsatch(loginUser({ type: LOGIN_SUCCESS, userId: login.id })),
     onError: ({ message }) =>
       dipsatch(loginUser({ type: LOGIN_ERROR, message })),
   });
@@ -25,6 +34,9 @@ const Login: React.FC<RouteComponentProps<{}>> = ({ history }) => {
     const values = formValues as { email: string; password: string };
     await loginMutation({ variables: { ...values } });
   };
+
+  useEffect(() => console.log(data?.login.id), [data]);
+
   useEffect(() => {
     setSuccess(loginState.loggedIn);
   }, [loginState]);

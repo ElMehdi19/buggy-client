@@ -100,7 +100,10 @@ export const NOTIFICATIONS = gql`
   query {
     notifications {
       count
-      notifications
+      notifications {
+        report
+        notification
+      }
     }
   }
 `;
