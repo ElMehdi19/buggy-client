@@ -27,7 +27,7 @@ const ReportForm: React.FC<Props> = ({ projects, handleSubmit }) => {
       steps.pop();
       setSteps([...steps]);
     }
-  }, [nSteps]);
+  }, [nSteps, steps]);
 
   return (
     <Form

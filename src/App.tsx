@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,8 +13,8 @@ import Wrapper from "./components/main/Home";
 import Navbar from "./components/main/Header";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/Profile";
-import { RootState } from "./store/reducers/rootReducer";
-import { LoginState } from "./store/reducers/authReducer";
+// import { RootState } from "./store/reducers/rootReducer";
+// import { LoginState } from "./store/reducers/authReducer";
 import NewReport from "./components/report/NewReport";
 import Report from "./components/report/Report";
 import { getMainDefinition } from "@apollo/client/utilities";
@@ -52,9 +52,9 @@ export const client = new ApolloClient({
 });
 
 const App: React.FC = () => {
-  const { loggedIn } = useSelector<RootState, LoginState>(
-    (state) => state.login
-  );
+  // const { loggedIn } = useSelector<RootState, LoginState>(
+  //   (state) => state.login
+  // );
 
   return (
     <ApolloProvider client={client}>

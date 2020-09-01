@@ -30,6 +30,7 @@ const ReportTimeline: React.FC<Props> = ({ issueEvents }) => {
       });
       setEvents([...events, ...renderEvents]);
     }
+    // eslint-disable-next-line
   }, [issueEvents]);
   return <Timeline mode="alternate">{events.reverse()}</Timeline>;
 };

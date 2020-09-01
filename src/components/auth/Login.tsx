@@ -45,6 +45,7 @@ const Login: React.FC<RouteComponentProps<{}>> = ({ history }) => {
     if (success) {
       history.push("/");
     }
+    // eslint-disable-next-line
   }, [success]);
 
   return <LoginForm handleSubmit={handleSubmit} />;

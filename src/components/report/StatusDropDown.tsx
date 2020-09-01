@@ -38,7 +38,11 @@ const StatusDropDown: React.FC<Props> = ({ reportId, status }) => {
     <>
       {status ? (
         <Dropdown overlay={menu}>
-          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+          <a
+            className="ant-dropdown-link"
+            onClick={(e) => e.preventDefault()}
+            href="/"
+          >
             <Tag color={STATUS_COLORS[status]}>{status}</Tag>
             <DownOutlined />
           </a>

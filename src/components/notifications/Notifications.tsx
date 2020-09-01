@@ -36,7 +36,7 @@ const Notifications: React.FC = () => {
   const [notifications, setNotifications] = useState<
     { report: number; notification: string }[]
   >([]);
-  const [show, _] = useState<boolean>(!!count);
+  const [show] = useState<boolean>(!!count);
   const { data: noticesData, loading: noticesLoading } = useQuery<
     Notifications
   >(NOTIFICATIONS);
@@ -53,22 +53,22 @@ const Notifications: React.FC = () => {
   const handleBellClick = () => {
     dispatch(notificationAction(notificationState));
     resetNotificationsCount();
+    const cache = client.readQuery<Notifications>({ query: NOTIFICATIONS });
+    if (cache) {
+      const { notifications } = cache;
+      const update: Notifications = {
+        notifications: {
+          ...notifications,
+          count: 0,
+        },
+      };
+      updateCache(NOTIFICATIONS, update);
+    }
   };
 
   useEffect(() => {
     if (!noticesLoading && noticesData) {
       setNotifications(noticesData.notifications.notifications);
-      const cache = client.readQuery<Notifications>({ query: NOTIFICATIONS });
-      if (cache) {
-        const { notifications } = cache;
-        const update: Notifications = {
-          notifications: {
-            ...notifications,
-            count: 0,
-          },
-        };
-        updateCache(NOTIFICATIONS, update);
-      }
       setCount(noticesData.notifications.count);
     }
   }, [noticesData, noticesLoading]);
@@ -80,8 +80,23 @@ const Notifications: React.FC = () => {
       if (userId && notifier !== parseInt(userId)) {
         setNotifications([{ notification, report }, ...notifications]);
         setCount(count + 1);
+        const cache = client.readQuery<Notifications>({ query: NOTIFICATIONS });
+        if (cache) {
+          const { notifications } = cache;
+          const update: Notifications = {
+            notifications: {
+              notifications: [
+                { notification, report },
+                ...notifications.notifications,
+              ],
+              count: count + 1,
+            },
+          };
+          updateCache(NOTIFICATIONS, update);
+        }
       }
     }
+    // eslint-disable-next-line
   }, [data, loading]);
   return (
     <div>

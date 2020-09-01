@@ -16,6 +16,7 @@ export const NEW_COMMENT = gql`
 export const NEW_NOTIFICATION = gql`
   subscription {
     newNotification {
+      report
       notifier
       notification
     }

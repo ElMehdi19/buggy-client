@@ -36,7 +36,7 @@ const CommentList: React.FC<{ reportId: number }> = ({ reportId }) => {
       });
       setComments(commentList);
     }
-  }, [data]);
+  }, [loading, data]);
   return (
     <List
       bordered={true}
