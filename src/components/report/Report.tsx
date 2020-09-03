@@ -30,7 +30,11 @@ export type SingleReportType = {
   created: string;
   updated: string;
   reproduceSteps: string[];
-  project: { name: string };
+  project: {
+    name: string;
+    manager: { id: number } | null;
+    users: Reporter[];
+  };
   reporter: Reporter;
   events: string;
 };
@@ -44,6 +48,7 @@ const Report: React.FC<RouteComponentProps<{ reportId: string }>> = ({
   const [report, setReport] = useState<SingleReportType>();
 
   useEffect(() => {
+    console.log(data?.report.project.users);
     if (data?.report) {
       getReportObj(data.report);
       setReport(data.report);

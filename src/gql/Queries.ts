@@ -4,7 +4,8 @@ export const GET_USERS = gql`
   {
     users {
       id
-      email
+      firstName
+      lastName
     }
   }
 `;
@@ -65,6 +66,12 @@ export const REPORT = gql`
       events
       project {
         name
+        manager {
+          id
+        }
+        users {
+          id
+        }
       }
       reporter {
         id

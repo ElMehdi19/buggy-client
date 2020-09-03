@@ -83,3 +83,11 @@ export const updateCache = <Record>(query: DocumentNode, data: Record) => {
     client.writeQuery<Record>({ query, data: { ...cache, ...data } });
   }
 };
+
+export const isManager = (manager: number | undefined): boolean => {
+  if (!manager) return false;
+  const currentUser = localStorage.getItem("userId");
+  if (!currentUser) return false;
+  if (manager !== parseInt(currentUser)) return false;
+  return true;
+};

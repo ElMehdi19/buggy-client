@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Avatar, Button, Tag } from "antd";
 import { SingleReportType } from "./Report";
 import StatusDropDown from "./StatusDropDown";
+import { isManager } from "../../utlis";
 
 type Props = {
   loading: boolean;
@@ -34,7 +35,9 @@ const ReportTemplate: React.FC<Props> = ({ loading, report }) => {
         hoverable={false}
       >
         <Button danger>Edit</Button>
-        <Button type="primary">Assign</Button>
+        {isManager(report?.project.manager?.id) && (
+          <Button type="primary">Assign</Button>
+        )}
         <Button>
           <a href="#comments">Comment</a>
         </Button>

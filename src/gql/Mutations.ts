@@ -55,3 +55,9 @@ export const RESET_NOTIFICATIONS_COUNT = gql`
     resetNotificationCount
   }
 `;
+
+export const ASSIGN_BUG = gql`
+  mutation AssingIssue($id: Int!, $userId: Int!) {
+    assingIssue(id: $id, userId: $userId)
+  }
+`;

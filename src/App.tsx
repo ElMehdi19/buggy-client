@@ -19,7 +19,7 @@ import NewReport from "./components/report/NewReport";
 import Report from "./components/report/Report";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-import Blank from "./components/main/Blank";
+import Blank from "./components/report/ReportAssign";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql",
