@@ -1,53 +1,41 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
-import { Modal, Radio } from "antd";
-import { RadioChangeEvent } from "antd/lib/radio";
-import { GET_USERS } from "../../gql/Queries";
-import { ASSIGN_BUG } from "../../gql/Mutations";
-
-type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
+import React from "react";
+import { Dispatch } from "redux";
+import { Button } from "antd";
+import { isManager } from "../../utlis";
+import { UserType } from "./Report";
+type Props = {
+  manager: { id: number } | undefined | null;
+  assignee: UserType | undefined;
+  dispatch: Dispatch;
 };
 
-const ReportAssign: React.FC = () => {
-  const { data, loading } = useQuery<{ users: User[] }>(GET_USERS);
-  const [assignBug] = useMutation(ASSIGN_BUG, {
-    onCompleted: () => console.log("success"),
-    onError: () => console.log("error"),
-  });
-  const [userId, setUserId] = useState<number>();
-  const [commitLoading, setCommitLoading] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(true);
-  const handleChange = (e: RadioChangeEvent) => {
-    setUserId(e.target.value);
-  };
-  const handleSubmit = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    setCommitLoading(true);
-    await assignBug({ variables: { id: 9, userId } });
-    setCommitLoading(false);
-  };
-  return (
-    <Modal
-      title="Assign this issue to a project member"
-      visible={visible}
-      onOk={handleSubmit}
-      onCancel={() => setVisible(false)}
-      confirmLoading={commitLoading}
-    >
-      {!loading && data ? (
-        <Radio.Group onChange={handleChange}>
-          {data.users.map((user) => (
-            <Radio value={user.id} style={{ display: "block" }} key={user.id}>
-              {`${user.firstName} ${user.lastName}`}
-            </Radio>
-          ))}
-        </Radio.Group>
-      ) : null}
-    </Modal>
-  );
+const ReportAssign: React.FC<Props> = ({ manager, assignee, dispatch }) => {
+  const handleClick = () => dispatch({ type: "SHOW_MODAL" });
+  if (isManager(manager?.id) && assignee)
+    return (
+      <Button type="primary" title="Reassign" onClick={handleClick}>
+        {assignee.firstName} {assignee.lastName}
+      </Button>
+    );
+
+  if (isManager(manager?.id) && !assignee)
+    return (
+      <Button type="primary" onClick={handleClick}>
+        Assign
+      </Button>
+    );
+
+  if (!isManager(manager?.id) && assignee)
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>Assinged to</span>
+        <span style={{ color: "#1890ff" }} title="assign">
+          {assignee.firstName} {assignee.lastName}
+        </span>
+      </div>
+    );
+
+  return null;
 };
 
 export default ReportAssign;

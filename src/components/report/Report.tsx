@@ -8,7 +8,7 @@ import CommentSection from "../comments/CommentSection";
 import { ReportWrapper } from "../../layout/Wrapper";
 import { getReportObj } from "../../utlis";
 
-type Reporter = {
+export type UserType = {
   id: number;
   firstName: string;
   lastName: string;
@@ -18,7 +18,7 @@ type Comment = {
   id: number;
   content: number;
   posted: string;
-  author: Reporter;
+  author: UserType;
 };
 
 export type SingleReportType = {
@@ -33,9 +33,10 @@ export type SingleReportType = {
   project: {
     name: string;
     manager: { id: number } | null;
-    users: Reporter[];
+    users: UserType[];
   };
-  reporter: Reporter;
+  reporter: UserType;
+  assignee: UserType;
   events: string;
 };
 
@@ -48,7 +49,6 @@ const Report: React.FC<RouteComponentProps<{ reportId: string }>> = ({
   const [report, setReport] = useState<SingleReportType>();
 
   useEffect(() => {
-    console.log(data?.report.project.users);
     if (data?.report) {
       getReportObj(data.report);
       setReport(data.report);

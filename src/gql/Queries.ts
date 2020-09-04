@@ -79,6 +79,11 @@ export const REPORT = gql`
         lastName
         email
       }
+      assignee {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `;
