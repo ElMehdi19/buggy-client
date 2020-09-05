@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import ReportsTable, { ReportType } from "./ReportsTable";
 import { REPORTS } from "../../gql/Queries";
-import { getReportRow } from "../../utlis";
+import { getReportRow } from "../../utils";
 import { SingleReportType } from "./Report";
 
 const ReportsMain: React.FC = () => {

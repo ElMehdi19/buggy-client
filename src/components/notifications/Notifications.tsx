@@ -11,7 +11,7 @@ import { RootState } from "../../store/reducers/rootReducer";
 import { notificationState } from "../../store/reducers/notificationReducer";
 import notificationAction from "../../store/actions/notificationAction";
 import { client } from "../../App";
-import { updateCache } from "../../utlis";
+import { updateCache } from "../../utils";
 
 type NewNotification = {
   newNotification: {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Dispatch } from "redux";
 import { Button } from "antd";
-import { isManager } from "../../utlis";
+import { isManager } from "../../utils";
 import { UserType } from "./Report";
 type Props = {
   manager: { id: number } | undefined | null;

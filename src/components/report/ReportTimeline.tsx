@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Timeline } from "antd";
-import { timelineItemColor } from "../../utlis";
+import { timelineItemColor } from "../../utils";
 import moment from "moment";
 
 type Props = {

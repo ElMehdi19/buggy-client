@@ -6,7 +6,7 @@ import ReportTemplate from "./ReportTemplate";
 import ReportTimeline from "./ReportTimeline";
 import CommentSection from "../comments/CommentSection";
 import { ReportWrapper } from "../../layout/Wrapper";
-import { getReportObj } from "../../utlis";
+import { getReportObj } from "../../utils";
 
 export type UserType = {
   id: number;
