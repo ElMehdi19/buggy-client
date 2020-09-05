@@ -74,6 +74,7 @@ export const timelineItemColor = (description: string): string => {
   if (description.includes("TESTED")) return "green";
   if (description.includes("CLOSED")) return "geekblue";
   if (description.includes("comment")) return "cyan";
+  if (description.includes("assigned")) return "red";
   return "magenta";
 };
 

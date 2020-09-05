@@ -114,6 +114,7 @@ export const NOTIFICATIONS = gql`
       count
       notifications {
         report
+        notifier
         notification
       }
     }

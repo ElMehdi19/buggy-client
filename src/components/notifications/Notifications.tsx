@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, useSubscription } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
-import { Badge } from "antd";
+import { Badge, notification } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import { NOTIFICATIONS } from "../../gql/Queries";
 import { RESET_NOTIFICATIONS_COUNT } from "../../gql/Mutations";
@@ -26,6 +26,7 @@ type Notifications = {
     count: number;
     notifications: {
       report: number;
+      notifier: number;
       notification: string;
     }[];
   };
@@ -68,7 +69,11 @@ const Notifications: React.FC = () => {
 
   useEffect(() => {
     if (!noticesLoading && noticesData) {
-      setNotifications(noticesData.notifications.notifications);
+      const userId = localStorage.getItem("userId");
+      const notifications = noticesData.notifications.notifications.filter(
+        (notification) => notification.notifier !== parseInt(userId as string)
+      );
+      setNotifications(notifications);
       setCount(noticesData.notifications.count);
     }
   }, [noticesData, noticesLoading]);
@@ -86,7 +91,7 @@ const Notifications: React.FC = () => {
           const update: Notifications = {
             notifications: {
               notifications: [
-                { notification, report },
+                { notification, report, notifier },
                 ...notifications.notifications,
               ],
               count: count + 1,
