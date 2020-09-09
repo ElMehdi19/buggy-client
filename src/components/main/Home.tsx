@@ -14,9 +14,11 @@ const Wrapper: React.FC<RouteComponentProps<{}>> = () => {
       <div>
         <Link to="/report/new">
           <Button
-            style={{ float: "right", margin: "10px 10px" }}
+            style={{
+              float: "right",
+              margin: "10px 10px",
+            }}
             type="primary"
-            ghost
           >
             Report Issue
           </Button>

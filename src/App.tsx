@@ -1,5 +1,6 @@
 import React from "react";
 // import { useSelector } from "react-redux";
+import { Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,17 +9,18 @@ import {
   split,
 } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
-import { Route } from "react-router-dom";
+import { getMainDefinition } from "@apollo/client/utilities";
+
+// import { RootState } from "./store/reducers/rootReducer";
+// import { LoginState } from "./store/reducers/authReducer";
+
 import Wrapper from "./components/main/Home";
 import Navbar from "./components/main/Header";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/Profile";
-// import { RootState } from "./store/reducers/rootReducer";
-// import { LoginState } from "./store/reducers/authReducer";
 import NewReport from "./components/report/NewReport";
 import Report from "./components/report/Report";
-import { getMainDefinition } from "@apollo/client/utilities";
-
+import Project from "./components/project/Project";
 import Blank from "./components/report/ReportAssign";
 
 const httpLink = new HttpLink({
@@ -67,6 +69,7 @@ const App: React.FC = () => {
         <Route path="/profile" component={Profile} />
         <Route exact path="/report/new" component={NewReport} />
         <Route path="/reports/:reportId" component={Report} />
+        <Route path="/projects/:projectId" component={Project} />
       </div>
     </ApolloProvider>
   );

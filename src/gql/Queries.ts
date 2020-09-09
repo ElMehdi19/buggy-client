@@ -20,6 +20,24 @@ export const WHOAMI = gql`
   }
 `;
 
+export const PROJECT = gql`
+  query getProject($id: Int!) {
+    project(id: $id) {
+      id
+      name
+      manager {
+        id
+        firstName
+        lastName
+      }
+      reports {
+        id
+        status
+      }
+    }
+  }
+`;
+
 export const PROJECTS = gql`
   {
     projects {
