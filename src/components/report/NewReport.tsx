@@ -32,11 +32,12 @@ const NewReport: React.FC<RouteComponentProps<{}>> = ({ history }) => {
       details,
       steps,
     };
-    await addReport({ variables: { ...report } });
+    // await addReport({ variables: { ...report } });
+    console.log(formValues);
   };
   return (
     <Wrapper>
-      <h2>New Report</h2>
+      <h2 style={{ color: "#10185e" }}>New Report</h2>
       {loading ? (
         "Loading..."
       ) : data ? (

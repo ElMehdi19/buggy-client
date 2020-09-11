@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Input, Select } from "antd";
+import { Form, Button, Input, Select, Upload, message } from "antd";
 import {
   InfoCircleOutlined,
   PlusOutlined,
   MinusCircleFilled,
+  InboxOutlined,
 } from "@ant-design/icons";
 
 const { TextArea } = Input;
@@ -143,6 +144,41 @@ const ReportForm: React.FC<Props> = ({ projects, handleSubmit }) => {
             <PlusOutlined /> Add Step
           </Button>
         </div>
+      </div>
+      <div style={{ marginBottom: 10 }}>
+        <h3>Add attachments</h3>
+        <Form.Item
+          name="dragger"
+          valuePropName="fileList"
+          getValueFromEvent={(e) => (Array.isArray(e) ? e : e && e.fileList)}
+          noStyle
+        >
+          <Upload.Dragger
+            name="files"
+            accept="image/*"
+            beforeUpload={(file) => {
+              const allowed = ["image/jpeg", "image/png"];
+              if (!allowed.includes(file.type)) {
+                message.error("File type not allowed");
+              }
+              return false;
+            }}
+            customRequest={(options) => {
+              console.log(options.file);
+              return;
+            }}
+          >
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">
+              Click or drag file to this area to upload
+            </p>
+            <p className="ant-upload-hint">
+              Support for a single or bulk upload.
+            </p>
+          </Upload.Dragger>
+        </Form.Item>
       </div>
       <Form.Item style={{ display: "flex" }}>
         <Button

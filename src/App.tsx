@@ -21,7 +21,8 @@ import Profile from "./components/profile/Profile";
 import NewReport from "./components/report/NewReport";
 import Report from "./components/report/Report";
 import Project from "./components/project/Project";
-import Blank from "./components/report/ReportAssign";
+// import Blank from "./components/report/ReportAssign";
+import Blank from "./components/main/Blank";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql",

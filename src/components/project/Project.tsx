@@ -47,7 +47,7 @@ const Project: React.FC<RouteComponentProps<{ projectId: string }>> = ({
             PR-{project.id}:{" "}
             <span style={{ fontFamily: "Arial" }}>{project.name}</span>
           </h2>
-          <span style={{ fontFamily: "Arial" }}>
+          <span className="ant-upload-hint" style={{ fontFamily: "Arial" }}>
             Manager: {project.manager.firstName} {project.manager.lastName}
           </span>
         </div>
