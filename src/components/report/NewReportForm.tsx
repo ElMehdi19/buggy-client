@@ -148,7 +148,7 @@ const ReportForm: React.FC<Props> = ({ projects, handleSubmit }) => {
       <div style={{ marginBottom: 10 }}>
         <h3>Add attachments</h3>
         <Form.Item
-          name="dragger"
+          name="attachments"
           valuePropName="fileList"
           getValueFromEvent={(e) => (Array.isArray(e) ? e : e && e.fileList)}
           noStyle

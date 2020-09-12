@@ -5,10 +5,10 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  HttpLink,
   split,
 } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
+import { createUploadLink } from "apollo-upload-client";
 import { getMainDefinition } from "@apollo/client/utilities";
 
 // import { RootState } from "./store/reducers/rootReducer";
@@ -21,10 +21,9 @@ import Profile from "./components/profile/Profile";
 import NewReport from "./components/report/NewReport";
 import Report from "./components/report/Report";
 import Project from "./components/project/Project";
-// import Blank from "./components/report/ReportAssign";
 import Blank from "./components/main/Blank";
 
-const httpLink = new HttpLink({
+const httpLink = createUploadLink({
   uri: "http://localhost:4000/graphql",
   credentials: "include",
 });

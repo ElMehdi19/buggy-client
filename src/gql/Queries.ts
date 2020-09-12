@@ -82,6 +82,7 @@ export const REPORT = gql`
       updated
       reproduceSteps
       events
+      attachments
       project {
         name
         manager {

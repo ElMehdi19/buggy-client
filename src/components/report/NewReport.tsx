@@ -24,16 +24,16 @@ const NewReport: React.FC<RouteComponentProps<{}>> = ({ history }) => {
       key.startsWith("step")
     );
     const steps = JSON.stringify(step_keys.map((key) => formValues[key]));
-    const { project, severity, bug, details } = formValues;
+    const { project, severity, bug, details, attachments } = formValues;
     const report = {
       project: parseInt(project),
       severity,
       bug,
       details,
       steps,
+      attachments,
     };
-    // await addReport({ variables: { ...report } });
-    console.log(formValues);
+    await addReport({ variables: { ...report } });
   };
   return (
     <Wrapper>

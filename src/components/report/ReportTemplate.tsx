@@ -88,6 +88,20 @@ const ReportTemplate: React.FC<Props> = ({ loading, report }) => {
             ))}
           </ul>
         </Grid>
+        {report?.attachments && (
+          <Grid hoverable={false}>
+            <h2>Attachments</h2>
+            <ul>
+              {report.attachments.map((file) => (
+                <li key={file}>
+                  <a href={`http://127.0.0.1:4000/attachments/${file}`}>
+                    {file}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Grid>
+        )}
       </Card>
     </>
   );

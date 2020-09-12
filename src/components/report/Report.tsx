@@ -30,6 +30,7 @@ export type SingleReportType = {
   created: string;
   updated: string;
   reproduceSteps: string[];
+  attachments: string[];
   project: {
     name: string;
     manager: { id: number } | null;

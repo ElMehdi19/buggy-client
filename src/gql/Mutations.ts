@@ -23,6 +23,7 @@ export const ADD_REPORT = gql`
     $severity: String!
     $project: Int!
     $steps: String!
+    $attachments: [Upload!]
   ) {
     addReport(
       bug: $bug
@@ -30,6 +31,7 @@ export const ADD_REPORT = gql`
       severity: $severity
       projectId: $project
       reproduceSteps: $steps
+      attachments: $attachments
     ) {
       id
     }
@@ -59,5 +61,11 @@ export const RESET_NOTIFICATIONS_COUNT = gql`
 export const ASSIGN_BUG = gql`
   mutation AssingIssue($id: Int!, $userId: Int!) {
     assingIssue(id: $id, userId: $userId)
+  }
+`;
+
+export const UPLOAD_FILE = gql`
+  mutation addFile($file: [Upload!]) {
+    addFile(attachments: $file)
   }
 `;
