@@ -11,7 +11,7 @@ type Props = {
 };
 
 const template = (notice: Notification) => (
-  <Link to={`/reports/${notice.report}`}>
+  <Link to={`/reports/${notice.report}`} key={notice.notification}>
     <li key={Math.random()}>{notice.notification}</li>
   </Link>
 );
