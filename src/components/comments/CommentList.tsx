@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import moment from "moment";
+// import moment from "moment";
+import dayjs from "dayjs";
 import { COMMENTS } from "../../gql/Queries";
 import { List, Comment } from "antd";
 
@@ -31,7 +32,8 @@ const CommentList: React.FC<{ reportId: number }> = ({ reportId }) => {
       const commentList: CommentResponse<string>[] = comments.map((comment) => {
         const { firstName, lastName } = comment.author;
         const author = `${firstName} ${lastName}`;
-        const posted = moment(parseInt(comment.posted)).format("MMM Do, YYYY");
+        // const posted = moment(parseInt(comment.posted)).format("MMM Do, YYYY");
+        const posted = dayjs(parseInt(comment.posted)).format("DD/MM/YYYY");
         return { ...comment, author, posted };
       });
       setComments(commentList);

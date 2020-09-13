@@ -6,4 +6,6 @@ export const CommentSectionWrapper = styled.div`
   gap: 10px;
   grid-column: span 3;
   padding: 5px;
+  background: #fff;
+  border-radius: 10px;
 `;

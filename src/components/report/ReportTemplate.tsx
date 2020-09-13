@@ -23,7 +23,7 @@ const ReportTemplate: React.FC<Props> = ({ loading, report }) => {
       {modalState.showModal && <ReportAssignModal id={report?.id} />}
       <Card
         loading={loading}
-        style={{ gridColumn: "span 3" }}
+        style={{ gridColumn: "span 3", borderRadius: "10px" }}
         title={
           <Meta
             title={`Issue: ${report ? report.bug : ""}`}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Timeline } from "antd";
 import { timelineItemColor } from "../../utils";
-import moment from "moment";
+// import moment from "moment";
+import dayjs from "dayjs";
 
 type Props = {
   issueEvents: string | undefined;
@@ -21,7 +22,8 @@ const ReportTimeline: React.FC<Props> = ({ issueEvents }) => {
       const renderEvents = parsedEvents.map((event) => {
         const { user, date, description } = event;
         const color = timelineItemColor(description);
-        const timestamp = moment(parseInt(date)).format("MMM Do, YYYY");
+        // const timestamp = moment(parseInt(date)).format("MMM Do, YYYY");
+        const timestamp = dayjs(parseInt(date)).format("DD/MM/YYYY");
         return (
           <Timeline.Item color={color} key={Math.random()}>
             {user} {description} @ {timestamp}
@@ -32,7 +34,14 @@ const ReportTimeline: React.FC<Props> = ({ issueEvents }) => {
     }
     // eslint-disable-next-line
   }, [issueEvents]);
-  return <Timeline mode="alternate">{events.reverse()}</Timeline>;
+  return (
+    <Timeline
+      mode="alternate"
+      style={{ background: "#10185e", color: "#f1f1f1", borderRadius: "10px" }}
+    >
+      {events.reverse()}
+    </Timeline>
+  );
 };
 
 export default ReportTimeline;
