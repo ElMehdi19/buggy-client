@@ -12,7 +12,10 @@ const ReportsMain: React.FC = () => {
   useEffect(() => {
     if (data) {
       const { reports } = data;
-      const reportList = reports.map((report) => getReportRow(report));
+      let reportList = reports.map((report) => getReportRow(report));
+      reportList = reportList.sort(
+        (a, b) => parseInt(b.timestamp!) - parseInt(a.timestamp!)
+      );
       setReports(reportList);
     }
   }, [data]);

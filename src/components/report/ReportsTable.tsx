@@ -86,6 +86,7 @@ export type ReportType = {
   created: string;
   project: string;
   updated: string;
+  timestamp?: string;
 };
 
 type Props = {

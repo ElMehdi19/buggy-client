@@ -1,5 +1,4 @@
 import { DocumentNode } from "@apollo/client";
-// import moment from "moment";
 import dayjs from "dayjs";
 import { client } from "./App";
 import { ReportType } from "./components/report/ReportsTable";
@@ -34,8 +33,6 @@ export const getReportRow = (report: ReportResponse): ReportType => {
     severity,
     status,
   } = report;
-  // const dateCreated = moment(parseInt(created)).format("MMM Do, YYYY");
-  // const dateUpdated = moment(parseInt(updated)).format("MMM Do, YYYY");
   const dateCreated = dayjs(parseInt(created)).format("DD/MM/YYYY");
   const dateUpdated = dayjs(parseInt(updated)).format("DD/MM/YYYY");
   const { firstName, lastName } = reporter;
@@ -49,19 +46,17 @@ export const getReportRow = (report: ReportResponse): ReportType => {
     project: project.name,
     created: dateCreated,
     updated: dateUpdated,
+    timestamp: updated,
   };
 };
 
 export const getReportObj = (report: ReportResponse): ReportType => {
-  // export const getReportObj = (report: any): ReportType => {
   const { reporter, project, created, updated, severity, status } = report;
   const { firstName, lastName } = reporter;
   const reporterName = `${firstName} ${lastName}`;
   const { name: projectName } = project;
   const dateCreated = dayjs(parseInt(created)).format("DD/MM/YYYY");
   const dateUpdated = dayjs(parseInt(updated)).format("DD/MM/YYYY");
-  // const dateCreated = moment(parseInt(created)).format("MMM Do, YYYY");
-  // const dateUpdated = moment(parseInt(updated)).format("MMM Do, YYYY");
   return {
     ...report,
     reporter: reporterName,
