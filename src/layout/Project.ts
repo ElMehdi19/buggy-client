@@ -16,10 +16,32 @@ export const ProjectHeading = styled.div`
 `;
 
 export const ChartsWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 200px);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 10px;
   div {
     border-radius: 10px;
+    &:nth-child(1) {
+      grid-column: 1/3;
+      grid-row: 1/3;
+    }
+  }
+`;
+
+export const FixersWrapper = styled.div`
+  background: #fff;
+  padding: 20px;
+  grid-column: 4/5;
+  li {
+    display: flex;
+    margin: 10px 0;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     flex: 1;
   }
 `;

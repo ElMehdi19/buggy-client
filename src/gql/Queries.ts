@@ -1,5 +1,15 @@
 import { gql } from "@apollo/client";
 
+export const GET_USER = gql`
+  query getUser($id: Int!) {
+    user(id: $id) {
+      firstName
+      lastName
+      image
+    }
+  }
+`;
+
 export const GET_USERS = gql`
   {
     users {
@@ -25,6 +35,7 @@ export const PROJECT = gql`
     project(id: $id) {
       id
       name
+      fixers
       manager {
         id
         firstName

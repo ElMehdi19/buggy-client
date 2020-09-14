@@ -8,6 +8,7 @@ import {
   ChartsWrapper,
 } from "../../layout/Project";
 import { ActiveIssuesChart } from "./ProjectCharts";
+import IssueFixers from "./IssueFixers";
 
 type User = {
   id: number;
@@ -25,6 +26,7 @@ type Project = {
   name: string;
   manager: User;
   reports: Issue[];
+  fixers: string;
 };
 
 const Project: React.FC<RouteComponentProps<{ projectId: string }>> = ({
@@ -55,8 +57,7 @@ const Project: React.FC<RouteComponentProps<{ projectId: string }>> = ({
       </ProjectHeading>
       <ChartsWrapper>
         <ActiveIssuesChart reports={project.reports} />
-        <div></div>
-        <div></div>
+        <IssueFixers fixers={project.fixers} />
       </ChartsWrapper>
       <div>Some stuff here</div>
     </ProjectWrapper>
