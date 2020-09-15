@@ -75,7 +75,9 @@ const Navbar: React.FC<RouteComponentProps<{}>> = ({ history }) => {
             <Notifications />
           </li>
           <li>
-            <SettingOutlined />
+            <NavLink to="/profile">
+              <SettingOutlined />
+            </NavLink>
           </li>
           <li>
             <button
