@@ -69,3 +69,19 @@ export const UPLOAD_FILE = gql`
     addFile(attachments: $file)
   }
 `;
+
+export const UPDATE_PROFILE = gql`
+  mutation updateProfile(
+    $oldPass: String
+    $newPass: String
+    $newPassConf: String
+    $image: Upload
+  ) {
+    updateProfile(
+      oldPass: $oldPass
+      newPass: $newPass
+      newPassConf: $newPassConf
+      image: $image
+    )
+  }
+`;

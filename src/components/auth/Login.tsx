@@ -5,6 +5,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { RootState } from "../../store/reducers/rootReducer";
 import { LoginState } from "../../store/reducers/authReducer";
 import loginUser from "../../store/actions/authAction";
+import { WHOAMI } from "../../gql/Queries";
 import { LOGIN } from "../../gql/Mutations";
 import { LOGIN_ERROR, LOGIN_SUCCESS } from "../../store/actions/constants";
 import LoginForm from "./LoginForm";
@@ -28,6 +29,7 @@ const Login: React.FC<RouteComponentProps<{}>> = ({ history }) => {
       dipsatch(loginUser({ type: LOGIN_SUCCESS, userId: login.id })),
     onError: ({ message }) =>
       dipsatch(loginUser({ type: LOGIN_ERROR, message })),
+    refetchQueries: [{ query: WHOAMI }],
   });
 
   const handleSubmit = async (formValues: { [key: string]: string }) => {

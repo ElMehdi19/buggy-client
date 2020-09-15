@@ -92,3 +92,20 @@ export const isManager = (manager: number | undefined): boolean => {
   if (manager !== parseInt(currentUser)) return false;
   return true;
 };
+
+export const any = (array: any[]): boolean => {
+  for (const item of array) {
+    if (item) return true;
+  }
+  return false;
+};
+
+export const all = (array: any[]): boolean => {
+  for (const item of array) {
+    if (!item) return false;
+  }
+  return true;
+};
+
+export const comparePassword = (pwd_1: string, pwd_2: string): boolean =>
+  pwd_1 === pwd_2;

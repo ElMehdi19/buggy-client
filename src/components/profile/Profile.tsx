@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
 import { ProfileWrapper } from "../../layout/Profile";
 import { WHOAMI } from "../../gql/Queries";
 import { RootState } from "../../store/reducers/rootReducer";
 import { LoginState } from "../../store/reducers/authReducer";
 import UserInfo from "./UserInfo";
 import UserStats from "./UserStats";
+import { Redirect } from "react-router-dom";
 
 export type UserType = {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
+  image: string;
 };
 
 const Profile: React.FC = () => {
@@ -23,12 +24,19 @@ const Profile: React.FC = () => {
     onCompleted: () => setSuccess(true),
     onError: () => setSuccess(false),
   });
-  console.log(loginState);
+
+  if (!loginState.loggedIn && !localStorage.getItem("userId")) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <ProfileWrapper>
-      <UserInfo />
-      <UserStats />
+      {!loading && data && (
+        <>
+          <UserInfo {...data.whoami} />
+          <UserStats />
+        </>
+      )}
     </ProfileWrapper>
   );
 };

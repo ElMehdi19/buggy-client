@@ -26,6 +26,8 @@ export const WHOAMI = gql`
       id
       email
       firstName
+      lastName
+      image
     }
   }
 `;
