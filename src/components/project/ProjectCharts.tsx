@@ -1,6 +1,6 @@
 import React from "react";
 import { Donut } from "@ant-design/charts";
-import { DonutViewConfig } from "@antv/g2plot/lib/plots/donut/layer";
+import { donutConfig } from "../../utils";
 import { Issue } from "./Project";
 
 export const ActiveIssuesChart: React.FC<{ reports: Issue[] }> = ({
@@ -16,22 +16,11 @@ export const ActiveIssuesChart: React.FC<{ reports: Issue[] }> = ({
       value: reports.filter((report) => report.status === "CLOSED").length,
     },
   ];
-  const config: DonutViewConfig = {
-    title: {
-      alignTo: "left",
-      visible: true,
-      text: "Issues status",
-      style: { fontSize: 20 },
-    },
+  const config = donutConfig({
+    title: { text: "Issues status", size: 20 },
     radius: 0.8,
-    padding: "auto",
     data,
-    angleField: "value",
-    colorField: "type",
-    legend: {
-      position: "bottom-center",
-    },
-  };
+  });
   return (
     <Donut
       {...config}

@@ -1,5 +1,6 @@
 import { DocumentNode } from "@apollo/client";
 import dayjs from "dayjs";
+import { DonutViewConfig } from "@antv/g2plot/lib/plots/donut/layer";
 import { client } from "./App";
 import { ReportType } from "./components/report/ReportsTable";
 
@@ -109,3 +110,36 @@ export const all = (array: any[]): boolean => {
 
 export const comparePassword = (pwd_1: string, pwd_2: string): boolean =>
   pwd_1 === pwd_2;
+
+interface ConfigParams {
+  title: {
+    text: string;
+    size: number;
+  };
+  radius: number;
+  data: {
+    type: string;
+    value: number;
+  }[];
+}
+
+export const donutConfig = (configuartion: ConfigParams): DonutViewConfig => {
+  const { title, radius, data } = configuartion;
+  const config: DonutViewConfig = {
+    title: {
+      alignTo: "middle",
+      visible: true,
+      text: title.text,
+      style: { fontSize: title.size, fontFamily: "Segoe UI" },
+    },
+    radius,
+    data,
+    padding: "auto",
+    angleField: "value",
+    colorField: "type",
+    legend: {
+      position: "bottom-center",
+    },
+  };
+  return config;
+};

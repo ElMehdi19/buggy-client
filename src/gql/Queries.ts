@@ -28,6 +28,8 @@ export const WHOAMI = gql`
       firstName
       lastName
       image
+      reportCount
+      fixedCount
     }
   }
 `;

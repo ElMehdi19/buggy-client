@@ -15,6 +15,8 @@ export type UserType = {
   lastName: string;
   email: string;
   image: string;
+  reportCount: number;
+  fixedCount: number;
 };
 
 const Profile: React.FC = () => {
@@ -34,7 +36,10 @@ const Profile: React.FC = () => {
       {!loading && data && (
         <>
           <UserInfo {...data.whoami} />
-          <UserStats />
+          <UserStats
+            reportCount={data.whoami.reportCount}
+            fixedCount={data.whoami.fixedCount}
+          />
         </>
       )}
     </ProfileWrapper>
