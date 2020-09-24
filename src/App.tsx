@@ -1,5 +1,5 @@
 import React from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -11,8 +11,8 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { createUploadLink } from "apollo-upload-client";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-// import { RootState } from "./store/reducers/rootReducer";
-// import { LoginState } from "./store/reducers/authReducer";
+import { RootState } from "./store/reducers/rootReducer";
+import { LoginState } from "./store/reducers/authReducer";
 
 import Wrapper from "./components/main/Home";
 import Navbar from "./components/main/Header";
@@ -54,9 +54,9 @@ export const client = new ApolloClient({
 });
 
 const App: React.FC = () => {
-  // const { loggedIn } = useSelector<RootState, LoginState>(
-  //   (state) => state.login
-  // );
+  const { loggedIn } = useSelector<RootState, LoginState>(
+    (state) => state.login
+  );
 
   return (
     <ApolloProvider client={client}>

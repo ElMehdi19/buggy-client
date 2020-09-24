@@ -26,7 +26,7 @@ const Wrapper: React.FC<RouteComponentProps<{}>> = () => {
           </Button>
         </Link>
       </div>
-      {loginState.loggedIn ? <ReportsMain /> : <Redirect to="/login" />}
+      {/* {loginState.loggedIn ? <ReportsMain /> : <Redirect to="/login" />} */}
       <ReportsMain />
     </div>
   );

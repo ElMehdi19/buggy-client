@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useQuery, useMutation } from "@apollo/client";
-import { RouteComponentProps, withRouter, NavLink } from "react-router-dom";
+import {
+  RouteComponentProps,
+  withRouter,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
 import { PROJECTS } from "../../gql/Queries";
 import { LOGOUT } from "../../gql/Mutations";
 import loginAction from "../../store/actions/authAction";
@@ -15,6 +21,8 @@ import {
   BugOutlined,
   DownOutlined,
 } from "@ant-design/icons";
+import { RootState } from "../../store/reducers/rootReducer";
+import { LoginState } from "../../store/reducers/authReducer";
 
 type Project = { id: number; name: string };
 
@@ -35,11 +43,14 @@ const ProjectsMenu: React.FC = () => {
 };
 
 const Navbar: React.FC<RouteComponentProps<{}>> = ({ history }) => {
+  const loginState = useSelector<RootState, LoginState>((state) => state.login);
   const dispatch = useDispatch();
   const [logoutMutation] = useMutation(LOGOUT, {
     onCompleted: () => dispatch(loginAction({ type: LOGOUT_SUCCESS })),
   });
-
+  if (!loginState.loggedIn && !localStorage.getItem("userId")) {
+    return <Redirect to="/login" />;
+  }
   const handleLogout = async () => {
     await logoutMutation();
     history.push("/login");
