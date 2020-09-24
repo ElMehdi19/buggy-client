@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RouteComponentProps, Redirect } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { PROJECT } from "../../gql/Queries";
@@ -39,6 +39,18 @@ const Project: React.FC<RouteComponentProps<{ projectId: string }>> = ({
     variables: { id: parseInt(projectId) },
     onCompleted: ({ project }) => setProject(project),
   });
+
+  useEffect(() => {
+    if (!loading && data) {
+      try {
+        const { name } = data.project;
+        document.title = `Buggy - ${name}`;
+      } catch (e) {
+        document.title = `Buggy`;
+      }
+    }
+  }, [loading, data]);
+
   if (!loading && !data) return <Redirect to="/" />;
   if (!project) return null;
   return (

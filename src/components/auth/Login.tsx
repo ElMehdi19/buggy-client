@@ -37,7 +37,9 @@ const Login: React.FC<RouteComponentProps<{}>> = ({ history }) => {
     await loginMutation({ variables: { ...values } });
   };
 
-  useEffect(() => console.log(data?.login.id), [data]);
+  useEffect(() => {
+    document.title = "Buggy - Login";
+  }, []);
 
   useEffect(() => {
     setSuccess(loginState.loggedIn);

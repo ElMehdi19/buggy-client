@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useQuery } from "@apollo/client";
 import { ProfileWrapper } from "../../layout/Profile";
@@ -26,6 +26,17 @@ const Profile: React.FC = () => {
     onCompleted: () => setSuccess(true),
     onError: () => setSuccess(false),
   });
+
+  useEffect(() => {
+    if (!loading && data) {
+      try {
+        const { firstName, lastName } = data.whoami;
+        document.title = `Buggy - ${firstName} ${lastName}`;
+      } catch (e) {
+        document.title = `Buggy`;
+      }
+    }
+  }, [loading, data]);
 
   if (!loginState.loggedIn && !localStorage.getItem("userId")) {
     return <Redirect to="/login" />;
