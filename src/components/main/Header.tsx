@@ -12,7 +12,6 @@ import { Menu, Dropdown } from "antd";
 import {
   LogoutOutlined,
   SettingOutlined,
-  SearchOutlined,
   BugOutlined,
   DownOutlined,
 } from "@ant-design/icons";
@@ -68,9 +67,6 @@ const Navbar: React.FC<RouteComponentProps<{}>> = ({ history }) => {
           </li>
         </NavItems>
         <NavItems>
-          <li>
-            <SearchOutlined summary="Search" />
-          </li>
           <li>
             <Notifications />
           </li>

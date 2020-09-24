@@ -5,6 +5,8 @@ import { WHOAMI } from "../../gql/Queries";
 import { UPDATE_PROFILE } from "../../gql/Mutations";
 import { UserInfoWrapper } from "../../layout/Profile";
 import { any, comparePassword } from "../../utils";
+import Success from "../alerts/Success";
+import Error from "../alerts/Error";
 
 type Props = {
   firstName: string;
@@ -18,11 +20,20 @@ const UserInfo: React.FC<Props> = ({ firstName, lastName, email, image }) => {
   const [newPass, setNewPass] = useState<string>("");
   const [newPassConf, setNewPassConf] = useState<string>("");
   const [newImage, setNewImage] = useState<File | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [updateProfile] = useMutation(UPDATE_PROFILE, {
-    onCompleted: () => console.log("success"),
-    onError: () => console.log("error"),
+    onCompleted: () => {
+      setSuccess(true);
+      setErrorMessage("");
+    },
+    onError: ({ message }) => {
+      setErrorMessage(message);
+      setSuccess(false);
+    },
     refetchQueries: [{ query: WHOAMI }],
   });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
@@ -31,18 +42,26 @@ const UserInfo: React.FC<Props> = ({ firstName, lastName, email, image }) => {
       newPassConf,
       image: newImage,
     };
-    if (!any(Object.values(payload))) {
-      console.log("nothing was submitted");
-      return;
-    }
+    if (!any(Object.values(payload))) return null;
     if (!comparePassword(newPass, newPassConf)) {
-      console.log("passwords don't match");
+      setSuccess(false);
+      setErrorMessage(
+        "New password and password confirmation field don't match."
+      );
       return;
     }
     await updateProfile({ variables: { ...payload } });
+    setOldPass("");
+    setNewPass("");
+    setNewPassConf("");
   };
   return (
     <UserInfoWrapper>
+      {success ? (
+        <Success />
+      ) : errorMessage ? (
+        <Error message={errorMessage} />
+      ) : null}
       <form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
         <section className="profile-heading">
           <div className="image-upload">

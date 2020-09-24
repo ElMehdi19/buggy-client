@@ -17,11 +17,6 @@ export const UserInfoWrapper = styled.div`
   grid-area: INFO;
   background: #fff;
   border-radius: 10px;
-  /* display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center; */
   .profile-heading {
     gap: 30px;
     display: flex;
@@ -49,6 +44,13 @@ export const UserInfoWrapper = styled.div`
         filter: blur(2px);
       }
     }
+  }
+
+  .alert-success {
+    background: #16d355;
+  }
+  .alert-error {
+    background: #ff1313;
   }
 
   section:nth-child(2) {
