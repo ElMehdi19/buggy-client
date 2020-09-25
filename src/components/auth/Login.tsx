@@ -13,8 +13,6 @@ import LoginForm from "./LoginForm";
 type LoginMutationType = {
   login: {
     id: number;
-    firstName: string;
-    lastName: string;
   };
 };
 
@@ -23,7 +21,7 @@ const Login: React.FC<RouteComponentProps<{}>> = ({ history }) => {
 
   const loginState = useSelector<RootState, LoginState>((state) => state.login);
   const dipsatch = useDispatch();
-  const [loginMutation, { data }] = useMutation<LoginMutationType>(LOGIN, {
+  const [loginMutation] = useMutation<LoginMutationType>(LOGIN, {
     variables: { email: "", password: "" },
     onCompleted: ({ login }) =>
       dipsatch(loginUser({ type: LOGIN_SUCCESS, userId: login.id })),
